@@ -6,14 +6,12 @@ from torchvision import transforms
 from PIL import Image
 
 class MonetDataset(Dataset):
-    def __init__(self, content_dir, style_dir):
+    def __init__(self, content_dir, style_dir, tfm):
         self.contents = glob.glob(os.path.join(content_dir, '*.jpg'))
         self.styles = glob.glob(os.path.join(style_dir, '*.jpg'))
         self.len = len(self.contents)
         self.style_len = len(self.styles)
-        self.tfm = transforms.Compose([
-            transforms.ToTensor(),
-        ])
+        self.tfm = tfm
 
     def __getitem__(self, idx):
         content = self.contents[idx]
